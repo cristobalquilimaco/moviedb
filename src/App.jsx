@@ -1,5 +1,6 @@
 import './App.css';
 import axios from 'axios';
+import { useEffect } from 'react';
 import { useState } from 'react';
 import YouTube from 'react-youtube';
 
@@ -34,16 +35,34 @@ setMovie(results[0])
 
 }
 
+//Busqueda de peliculas
+const searchMovies = (e) =>{
+  e.preventDefault();
+  fetchMovies(searchKey)
+}
+
+useEffect(() => {
+  fetchMovies()
+}, [])
+
+
+
   return (
     <>
       <div>
+        <h2 className='text-center mt-5 mb-5'>Trailer Movies</h2>
+        <form className='container mb-4' onSubmit={searchMovies}>
+          <input type="text" placeholder='Search' onChange={(e)=> setSearchKey(e.target.value)} />
+          <button className='btn btn-primary'>Search</button>
+        </form>
         {/* En este contenedor se muestran las peliculas actuales */}
         <div className='container mt-3'>
           <div className='row'>
             {
               movies.map((movie) =>(
                 <div key={movie.id} className='col-md-4 mb-3'>
-                  <img src={`${URL_IMAGE + movie.poster_path}`} alt="" />
+                  <img src={`${URL_IMAGE + movie.poster_path}`} alt="" height={600} width="100%" />
+                  <h1 className='text-center'>{movie.title}</h1>
                 </div>
               ))
             }
