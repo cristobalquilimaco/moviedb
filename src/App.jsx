@@ -38,8 +38,10 @@ setMovie(results[0])
     <>
       <div>
         {/* En este contenedor se muestran las peliculas actuales */}
-        <div>
-          
+        <div className='container mt-3'>
+          <div className='row'>
+
+          </div>
         </div>
       </div>
     </>
