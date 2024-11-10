@@ -1,7 +1,7 @@
-import './App.css'
-import axios from 'axios'
-import { useState } from 'react'
-import YouTube from 'react-youtube'
+import './App.css';
+import axios from 'axios';
+import { useState } from 'react';
+import YouTube from 'react-youtube';
 
 function App() {
 
@@ -12,13 +12,35 @@ const URL_IMAGE = "https://image.tmdb.org/t/p/original"
 
 //VARIABLES DE ESTADO
 
-const [movies, setMovies] = useState([])
-const [searchKey, setSearchKey] = useState("")
+const [movies, setMovies] = useState([]);
+const [searchKey, setSearchKey] = useState("");
+const [trailer, setTrailer] = useState(null);
+const [movie, setMovie] = useState({title: "Loading Movies"});
+const [playing, setPlaying] = useState(false);
+
+// Peticion por get a la API
+const fetchMovies = async(searchKey) =>{
+  const type = searchKey ? "search" : "discover"
+  const {data: {results},
+} = await axios.get(`${API_URL}/${type}/movie`, {
+  params : {
+    api_key: API_KEY,
+    query: searchKey,
+  },
+});
+
+setMovies(results)
+setMovie(results[0])
+
+}
 
   return (
     <>
       <div>
-
+        {/* En este contenedor se muestran las peliculas actuales */}
+        <div>
+          
+        </div>
       </div>
     </>
   )
