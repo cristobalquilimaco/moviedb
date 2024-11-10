@@ -85,14 +85,97 @@ useEffect(() => {
           <input type="text" placeholder='Search' onChange={(e)=> setSearchKey(e.target.value)} />
           <button className='btn btn-primary'>Search</button>
         </form>
+
+        {/* CONTENEDOR DEL BVANNER Y REPRODUCTOR DE VIDEO */}
+          <div>
+            <main>
+              {
+                movie ? (
+                  <div
+                    className='viewtrailer'
+                    style={{
+                      backgroundImage: `url("${IMAGE_PATH}${movie.backdrop_path}")`,
+                    }}
+                  >
+                    {
+                      playing ? (
+                        <>
+                          <YouTube
+                            videoId={trailer.key}
+                            className='reproductor container'
+                            containerClassName={"youtube-container"}
+                            opts={{
+                              width: "100%",
+                              height: "100%",
+                              playerVars: {
+                                autoplay: 1,
+                                controls: 0,
+                                cc_load_policy: 0,
+                                fs: 0,
+                                iv_load_policy: 0,
+                                modestbranding: 0,
+                                rel: 0,
+                                showinfo: 0,
+                              }
+                            }}
+                          />
+                          <button onClick={() => setPlaying(false)} className='button1'>
+                            close
+                          </button>
+                        </>
+                      ) : (
+                        <div className='container'>
+                          <div className=''>
+                            {
+                              trailer ? (
+                                <button className='button1'
+                                onClick={() => setPlaying(true)}
+                                type='button'
+                                >
+                                Play Trailer
+                                </button>
+                              ) : (
+                                "sorry, trailer no available"
+                              )
+                            }
+                            <h1 className="text-white">{movie.title}</h1>
+                            <p className="text-white">{movie.overview}</p>
+                          </div>
+                        </div>
+                      )
+                    }
+                  </div>
+                ) :null
+              }
+            </main>
+          </div>
+
+
+{/* <div class="card">
+    <div class="img-container">
+        <div class="img">
+        </div>
+        <div class="description card">
+            <span class="title">
+                Card
+            </span>
+        </div>
+    </div>
+</div> */}
         {/* En este contenedor se muestran las peliculas actuales */}
-        <div className='container mt-2'>
-          <div className='row'>
+        <div className='card__container'>
+          <div className='row1'>
             {
               movies.map((movie) =>(
-                <div key={movie.id} className='col-md-4 mb-3'>
-                  <img src={`${URL_IMAGE + movie.poster_path}`} alt="" height={600} width="100%" />
-                  <p className='text-center'>{movie.title}</p>
+                <div key={movie.id} className='card'
+                onClick={() => selectMovie(movie)}
+                >
+                  <div className='img-container'>
+                  <img className='img__movie' src={`${URL_IMAGE + movie.poster_path}`} alt=""  />
+                  </div>
+                  <div className='description card'>
+                    <p className='movie__title'>{movie.title}</p>
+                  </div>
                 </div>
               ))
             }
