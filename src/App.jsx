@@ -40,7 +40,13 @@ setMovie(results[0])
         {/* En este contenedor se muestran las peliculas actuales */}
         <div className='container mt-3'>
           <div className='row'>
-
+            {
+              movies.map((movie) =>(
+                <div key={movie.id} className='col-md-4 mb-3'>
+                  <img src={`${URL_IMAGE + movie.poster_path}`} alt="" />
+                </div>
+              ))
+            }
           </div>
         </div>
       </div>
