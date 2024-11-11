@@ -31,7 +31,7 @@ const Home = ({ movies, movie, trailer, setPlaying, playing, setMovie }) => {
     <div className="">
       {/* Banner y reproductor de video */}
       <div className="">
-        <main className="principal__movie">
+        <main className="">
           {movie ? (
             <div
               className="viewtrailer"
@@ -60,9 +60,12 @@ const Home = ({ movies, movie, trailer, setPlaying, playing, setMovie }) => {
                       },
                     }}
                   />
-                  <button onClick={() => setPlaying(false)} className="button1">
-                    close
-                  </button>
+                    <button 
+                      onClick={() => setPlaying(false)} 
+                        className={`button1 ${playing ? 'playing' : 'not-playing'}`}
+                    >
+                      close
+                    </button>
                 </>
               ) : (
                 <div className="container">

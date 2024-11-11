@@ -1,13 +1,12 @@
 
+import { Link } from "react-router-dom";
 import "./styles/navbar.css";
 
 const Navbar = ({ searchKey, setSearchKey, searchMovies }) => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-transparent fixed-top" id="navbar">
+    <nav className="navbar navbar-expand-lg navbar-transparent" id="navbar">
       <div className="container">
-        <a className="navbar-brand text-white" href="#">
-          Movie App
-        </a>
+        <Link className="navbar-brand text-white" to="/">MovieHub</Link>
         <button
           className="navbar-toggler"
           type="button"
