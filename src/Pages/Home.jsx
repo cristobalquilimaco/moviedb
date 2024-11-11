@@ -1,7 +1,25 @@
+import { useState } from "react";
 import YouTube from "react-youtube";
 
 const Home = ({ movies, movie, trailer, setPlaying, playing, setMovie }) => {
   const IMAGE_PATH = "https://image.tmdb.org/t/p/original";
+
+  // ESTADOS PARA LA PAGINACION
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // VARIABLES PARA LA PAGINACION
+  const moviesPerPage = 10; // número de películas por página
+
+  // Cálculos para la paginación
+  const indexOfLastMovie = currentPage * moviesPerPage;
+  const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
+  const currentMovies = movies.slice(indexOfFirstMovie, indexOfLastMovie); // Películas de la página actual
+
+  // Función para cambiar de página
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  // Total de páginas
+  const totalPages = Math.ceil(movies.length / moviesPerPage);
 
   // Función para manejar la selección de una película
   const selectMovie = async (movie) => {
@@ -10,10 +28,10 @@ const Home = ({ movies, movie, trailer, setPlaying, playing, setMovie }) => {
   };
 
   return (
-    <div>
+    <div className="">
       {/* Banner y reproductor de video */}
-      <div>
-        <main>
+      <div className="">
+        <main className="principal__movie">
           {movie ? (
             <div
               className="viewtrailer"
@@ -69,11 +87,10 @@ const Home = ({ movies, movie, trailer, setPlaying, playing, setMovie }) => {
           ) : null}
         </main>
       </div>
-
-      {/* Muestra las películas actuales */}
+      <div className="movie__container__principal">
       <div className="card__container">
         <div className="row1">
-          {movies.map((movie) => (
+          {currentMovies.map((movie) => (
             <div
               key={movie.id}
               className="card"
@@ -83,7 +100,7 @@ const Home = ({ movies, movie, trailer, setPlaying, playing, setMovie }) => {
                 <img
                   className="img__movie"
                   src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
-                  alt=""
+                  alt={movie.title}
                 />
               </div>
               <div className="description card">
@@ -92,6 +109,22 @@ const Home = ({ movies, movie, trailer, setPlaying, playing, setMovie }) => {
             </div>
           ))}
         </div>
+
+        {/* Paginación */}
+        <div className="pagination">
+          {Array.from({ length: totalPages }, (_, index) => (
+            <button
+              key={index + 1}
+              onClick={() => paginate(index + 1)}
+              className={`page-link ${index + 1 === currentPage ? 'active' : ''}`}
+            >
+              {index + 1}
+            </button>
+          ))}
+        </div>
+      </div>
+      {/* Muestra las películas actuales (solo las de la página actual) */}
+      
       </div>
     </div>
   );

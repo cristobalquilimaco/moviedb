@@ -1,3 +1,17 @@
+.movie__container__principal{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card__container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
 .viewtrailer{
   min-height: 700px;
   background-size: cover;
@@ -30,6 +44,8 @@
   justify-content: center;
   gap: 1em;
 }
+
+
 
 /* CARDS MOVIE */
 /* CARDS MOVIE */
@@ -104,4 +120,37 @@
   white-space: nowrap; 
   overflow: hidden; 
   text-overflow: ellipsis; 
+}
+
+/* PAGINATION */
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  align-items: center;
+  border-radius: 1px;
+  margin-bottom: 10px;
+}
+
+.page-link {
+  margin: 0 5px;
+  padding: 5px 10px;
+  border: 1px solid rgb(33, 33, 109);
+  cursor: pointer;
+  background-color: #f8f9fa;
+  border-radius: 1px;
+}
+
+.page-link.active {
+  background-color: rgb(33, 33, 109);
+  color: white;
+  border-color: #007bff;
+  border-radius: 1px;
+}
+
+@media screen and (min-width: 600px) {
+  .card__container {
+    max-width: 80%;
+  }
 }
